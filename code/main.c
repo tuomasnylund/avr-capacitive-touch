@@ -26,6 +26,8 @@
 
 void initialize(void);
 
+//uint16_t moving_average(uint16_t new);
+
 //LUFA callbacks
 void EVENT_USB_Device_Connect(void);
 void EVENT_USB_Device_Disconnect(void);
@@ -37,6 +39,7 @@ void EVENT_USB_Device_ControlRequest(void);
 /**********************************************************
  * External variables
  **********************************************************/
+extern volatile uint8_t USB_DeviceState;
 
 /**********************************************************
  * Global variables
@@ -80,26 +83,29 @@ int main(void){
 
     //variables
     uint16_t i;
-    uint8_t j;
+    uint16_t sample;
     //char sBuffer[STRBUFLEN]; //!< character buffer for usb serial
 
+    DDRB |= (1<<PB5) | (1<<PB6);
+    DDRC |= (1<<PC6);
 
     //initialize
     initialize();
 
-
     i = 0;
-    j = 0;
     //main loop
     while (1)
     {
         i++;
         if (i>10000){
-            j++;
-            fprintf(&USBSerialStream,"value: %u\r\n",touch_measure(1));
-            //fprintf(&USBSerialStream,"test %i\r\n",j);
+            if(USB_DeviceState == DEVICE_STATE_Configured){
+                sample = touch_measure(1);
+                fprintf(&USBSerialStream,"value: %u\t average: nothing!\r\n",sample);
+            }
             i=0;
             PORTE ^= (1<<PE2);
+            PORTB ^= (1<<PB5) | (1<<PB6);
+            PORTC ^= (1<<PC6);
         }
 
         /**LUFA usb related tasks*/
@@ -118,6 +124,26 @@ int main(void){
 /**********************************************************
  * Other functions
  **********************************************************/
+
+/*
+uint16_t moving_average(uint16_t new){
+    static uint16_t samples[16];
+    static uint8_t i = 0;
+
+    uint8_t j = 0;
+    uint32_t retval = 0;
+ 
+    samples[i++] = new;
+    i %= 16;
+
+    for(j=0 ; j<16 ; j++)
+        retval += samples[j];
+
+    return retval/16;
+
+}
+*/
+
 
 /** Initializes all of the hardware. */
 void initialize(void){
