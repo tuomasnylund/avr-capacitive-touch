@@ -3,6 +3,7 @@
 #include <string.h>
 #include <stdio.h>
 
+
 //avr libs
 #include <avr/io.h>
 #include <util/delay.h>
@@ -79,26 +80,27 @@ int main(void){
 
     //variables
     uint16_t i;
-    char sBuffer[STRBUFLEN]; //!< character buffer for usb serial
+    uint8_t j;
+    //char sBuffer[STRBUFLEN]; //!< character buffer for usb serial
 
 
     //initialize
     initialize();
-    //DDRE |= (1<<PE2);
 
 
     i = 0;
+    j = 0;
     //main loop
     while (1)
     {
         i++;
         if (i>10000){
-            fprintf(&USBSerialStream,"test\r\n");
+            j++;
+            fprintf(&USBSerialStream,"value: %u\r\n",touch_measure(1));
+            //fprintf(&USBSerialStream,"test %i\r\n",j);
             i=0;
             PORTE ^= (1<<PE2);
         }
-        //_delay_ms(100);
-        //fprintf(&USBSerialStream,"value: %u\n",touch_measure(1));
 
         /**LUFA usb related tasks*/
         CDC_Device_USBTask(&VirtualSerial_CDC_Interface);
@@ -120,18 +122,18 @@ int main(void){
 /** Initializes all of the hardware. */
 void initialize(void){
 
-    /**clockdiv to 2 (external clock 16MHz, dviding it to 8MHz
-     * because 16MHz operation is not guaranteed at 3.3V) */
     CPU_PRESCALE(0x00);
 
-    _delay_ms(200);
+    //LED
+    DDRE |= (1<<PE2);
 
     /** LUFA USB related inits */
 	USB_Init();
 	CDC_Device_CreateBlockingStream
         (&VirtualSerial_CDC_Interface, &USBSerialStream);
 
-    //touch_init();
+    touch_init();
+    
     /** enable interrupts*/
     sei();
 }

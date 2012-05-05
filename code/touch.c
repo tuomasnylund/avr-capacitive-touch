@@ -24,27 +24,38 @@ static inline void adc_channel(uint8_t channel){
 }
 
 static inline uint16_t adc_get(void){
-    while(!(ADCSRA & ADIF));
+    ADCSRA |= (1<<ADSC);
+    while(!(ADCSRA & (1<<ADIF)));
     ADCSRA |= (1<<ADIF);
     return ADC;
 }
 
 void touch_init(void){
-    ADMUX |= (1<<REFS0); //reference AVCC (3.3v)
-    ADCSRA |= (1<<ADEN); //enable ADC
+    ADMUX  |= (1<<REFS0); //reference AVCC (3.3v)
+
     ADCSRA |= (1<<ADPS2)|(1<<ADPS1); //clockiv 64
     //final clock 8MHz/64 = 125kHz
+    
+    ADCSRA |= (1<<ADEN); //enable ADC
 }
 
 
 uint16_t touch_measure(uint8_t channel){
-    adc_channel(0xFF); //set ADC mux to ground;
+    uint8_t i;
+    uint16_t retval;
+
+    retval = 0;
+
     PORTF  |= (1<<PF7);
-    ADCSRA |= (1<<ADSC);
-    adc_get();
-
-
+    _delay_ms(1);
     PORTF &= ~(1<<PF7);
-    adc_channel(5);
-    return adc_get();
+
+    for (i=0 ; i<64 ; i++){
+        adc_channel(0b11111); //set ADC mux to ground;
+        adc_get();
+        adc_channel(7);
+        retval +=  adc_get();
+    }
+
+    return retval;
 }
