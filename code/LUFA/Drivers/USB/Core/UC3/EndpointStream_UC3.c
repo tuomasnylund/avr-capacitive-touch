@@ -1,13 +1,13 @@
 /*
              LUFA Library
-     Copyright (C) Dean Camera, 2011.
+     Copyright (C) Dean Camera, 2012.
               
   dean [at] fourwalledcubicle [dot] com
            www.lufa-lib.org
 */
 
 /*
-  Copyright 2011  Dean Camera (dean [at] fourwalledcubicle [dot] com)
+  Copyright 2012  Dean Camera (dean [at] fourwalledcubicle [dot] com)
 
   Permission to use, copy, modify, distribute, and sell this 
   software and its documentation for any purpose is hereby granted
@@ -228,3 +228,4 @@ uint8_t Endpoint_Null_Stream(uint16_t Length,
 #include "Template/Template_Endpoint_Control_R.c"
 
 #endif
+

@@ -1,13 +1,13 @@
 /*
              LUFA Library
-     Copyright (C) Dean Camera, 2011.
+     Copyright (C) Dean Camera, 2012.
 
   dean [at] fourwalledcubicle [dot] com
            www.lufa-lib.org
 */
 
 /*
-  Copyright 2011  Dean Camera (dean [at] fourwalledcubicle [dot] com)
+  Copyright 2012  Dean Camera (dean [at] fourwalledcubicle [dot] com)
 
   Permission to use, copy, modify, distribute, and sell this
   software and its documentation for any purpose is hereby granted
@@ -33,7 +33,7 @@
 
 void USB_INT_DisableAllInterrupts(void)
 {
-	USB.INTCTRLA     = 0;
+	USB.INTCTRLA    &= USB_INTLVL_gm;
 	USB.INTCTRLB     = 0;
 }
 
@@ -70,7 +70,7 @@ ISR(USB_BUSEVENT_vect)
 	if (USB_INT_HasOccurred(USB_INT_BUSEVENTI_Resume))
 	{
 		USB_INT_Clear(USB_INT_BUSEVENTI_Resume);
-		
+
 		if (USB_Device_ConfigurationNumber)
 		  USB_DeviceState = DEVICE_STATE_Configured;
 		else
@@ -86,10 +86,13 @@ ISR(USB_BUSEVENT_vect)
 	if (USB_INT_HasOccurred(USB_INT_BUSEVENTI_Reset))
 	{
 		USB_INT_Clear(USB_INT_BUSEVENTI_Reset);
-		
+
 		USB_DeviceState                = DEVICE_STATE_Default;
 		USB_Device_ConfigurationNumber = 0;
 
+		USB_Device_SetDeviceAddress(0);
+
+		Endpoint_ClearEndpoints();
 		Endpoint_ConfigureEndpoint(ENDPOINT_CONTROLEP, EP_TYPE_CONTROL,
 		                           ENDPOINT_DIR_OUT, USB_Device_ControlEndpointSize,
 		                           ENDPOINT_BANK_SINGLE);

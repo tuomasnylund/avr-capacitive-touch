@@ -1,13 +1,13 @@
 /*
              LUFA Library
-     Copyright (C) Dean Camera, 2011.
+     Copyright (C) Dean Camera, 2012.
 
   dean [at] fourwalledcubicle [dot] com
            www.lufa-lib.org
 */
 
 /*
-  Copyright 2011  Dean Camera (dean [at] fourwalledcubicle [dot] com)
+  Copyright 2012  Dean Camera (dean [at] fourwalledcubicle [dot] com)
 
   Permission to use, copy, modify, distribute, and sell this
   software and its documentation for any purpose is hereby granted
@@ -54,8 +54,6 @@
 			#define DF_STATUS_SECTORPROTECTION_ON           (1 << 1)
 			//@}
 
-			#define DF_MANUFACTURER_ATMEL                   0x1F
-
 			/** \name Dataflash Commands */
 			//@{
 			#define DF_CMD_GETSTATUS                        0xD7
@@ -92,6 +90,9 @@
 
 			#define DF_CMD_READMANUFACTURERDEVICEINFO       0x9F
 			//@}
+
+			/** Manufacturer code for Atmel Corporation, returned by Atmel Dataflash ICs in response to the \c DF_CMD_READMANUFACTURERDEVICEINFO command. */
+			#define DF_MANUFACTURER_ATMEL                   0x1F
 
 #endif
 

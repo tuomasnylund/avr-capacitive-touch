@@ -1,13 +1,13 @@
 /*
              LUFA Library
-     Copyright (C) Dean Camera, 2011.
+     Copyright (C) Dean Camera, 2012.
 
   dean [at] fourwalledcubicle [dot] com
            www.lufa-lib.org
 */
 
 /*
-  Copyright 2011  Dean Camera (dean [at] fourwalledcubicle [dot] com)
+  Copyright 2012  Dean Camera (dean [at] fourwalledcubicle [dot] com)
 
   Permission to use, copy, modify, distribute, and sell this
   software and its documentation for any purpose is hereby granted
@@ -144,7 +144,7 @@
 	#endif
 
 	/* Public Interface - May be used in end-application: */
-		/* Macros: */			
+		/* Macros: */
 			/** \name Endpoint Bank Mode Masks */
 			//@{
 			/** Mask for the bank mode selection for the \ref Endpoint_ConfigureEndpoint() macro. This indicates
@@ -634,6 +634,8 @@
 				uint8_t Dummy;
 
 				Dummy = UEDATX;
+
+				(void)Dummy;
 			}
 
 			/** Reads two bytes from the currently selected endpoint's bank in little endian format, for OUT
@@ -719,6 +721,8 @@
 
 				Dummy = UEDATX;
 				Dummy = UEDATX;
+
+				(void)Dummy;
 			}
 
 			/** Reads four bytes from the currently selected endpoint's bank in little endian format, for OUT
@@ -814,6 +818,8 @@
 				Dummy = UEDATX;
 				Dummy = UEDATX;
 				Dummy = UEDATX;
+
+				(void)Dummy;
 			}
 
 		/* External Variables: */

@@ -1,13 +1,13 @@
 /*
              LUFA Library
-     Copyright (C) Dean Camera, 2011.
+     Copyright (C) Dean Camera, 2012.
 
   dean [at] fourwalledcubicle [dot] com
            www.lufa-lib.org
 */
 
 /*
-  Copyright 2011  Dean Camera (dean [at] fourwalledcubicle [dot] com)
+  Copyright 2012  Dean Camera (dean [at] fourwalledcubicle [dot] com)
 
   Permission to use, copy, modify, distribute, and sell this
   software and its documentation for any purpose is hereby granted
@@ -29,7 +29,7 @@
 */
 
 /** \file
- *  \brief Board specific LED driver header for the PJRC Teensy boards.
+ *  \brief Board specific LED driver header for the PJRC Teensy 1.x/2.x boards.
  *  \copydetails Group_LEDs_TEENSY
  *
  *  \note This file should not be included directly. It is automatically included as needed by the LEDs driver
@@ -37,8 +37,17 @@
  */
 
 /** \ingroup Group_LEDs
+ *  \defgroup Group_LEDs_TEENSY2 TEENSY2
+ *  \brief Board specific LED driver header for the PJRC Teensy 2 boards.
+ *
+ *  See \ref Group_LEDs_TEENSY for more details.
+ */
+
+/** \ingroup Group_LEDs
  *  \defgroup Group_LEDs_TEENSY TEENSY
- *  \brief Board specific LED driver header for the PJRC Teensy boards.
+ *  \brief Board specific LED driver header for the PJRC Teensy 1.x/2.x boards.
+ *
+ *  \note For version 2 Teensy boards, compile with <code>BOARD = TEENSY2</code>.
  *
  *  Board specific LED driver header for the PJRC Teensy boards (http://www.pjrc.com/teensy/index.html).
  *
@@ -77,28 +86,55 @@
 			static inline void LEDs_Init(void)
 			{
 				DDRD  |= LEDS_ALL_LEDS;
-				PORTD |= LEDS_ALL_LEDS;
+
+				#if (BOARD == BOARD_TEENSY2)
+				PORTD &= ~LEDS_ALL_LEDS;
+				#else
+				PORTD |=  LEDS_ALL_LEDS;
+				#endif
+			}
+
+			static inline void LEDs_Disable(void)
+			{
+				DDRD  &= ~LEDS_ALL_LEDS;
+				PORTD &= ~LEDS_ALL_LEDS;
 			}
 
 			static inline void LEDs_TurnOnLEDs(const uint8_t LEDMask)
 			{
+				#if (BOARD == BOARD_TEENSY2)
+				PORTD |=  LEDMask;
+				#else
 				PORTD &= ~LEDMask;
+				#endif
 			}
 
 			static inline void LEDs_TurnOffLEDs(const uint8_t LEDMask)
 			{
-				PORTD |= LEDMask;
+				#if (BOARD == BOARD_TEENSY2)
+				PORTD &= ~LEDMask;
+				#else
+				PORTD |=  LEDMask;
+				#endif
 			}
 
 			static inline void LEDs_SetAllLEDs(const uint8_t LEDMask)
 			{
+				#if (BOARD == BOARD_TEENSY2)
+				PORTD = ((PORTD & ~LEDS_ALL_LEDS) | LEDMask);
+				#else
 				PORTD = ((PORTD | LEDS_ALL_LEDS) & ~LEDMask);
+				#endif
 			}
 
 			static inline void LEDs_ChangeLEDs(const uint8_t LEDMask,
 			                                   const uint8_t ActiveMask)
 			{
+				#if (BOARD == BOARD_TEENSY2)
+				PORTD = ((PORTD & ~LEDMask) | ActiveMask);
+				#else
 				PORTD = ((PORTD | LEDMask) & ~ActiveMask);
+				#endif
 			}
 
 			static inline void LEDs_ToggleLEDs(const uint8_t LEDMask)
@@ -109,7 +145,11 @@
 			static inline uint8_t LEDs_GetLEDs(void) ATTR_WARN_UNUSED_RESULT;
 			static inline uint8_t LEDs_GetLEDs(void)
 			{
+				#if (BOARD == BOARD_TEENSY2)
+				return (PORTD & LEDS_ALL_LEDS);
+				#else
 				return (~PORTD & LEDS_ALL_LEDS);
+				#endif
 			}
 		#endif
 

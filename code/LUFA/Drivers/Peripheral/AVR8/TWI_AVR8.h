@@ -1,13 +1,13 @@
 /*
              LUFA Library
-     Copyright (C) Dean Camera, 2011.
+     Copyright (C) Dean Camera, 2012.
 
   dean [at] fourwalledcubicle [dot] com
            www.lufa-lib.org
 */
 
 /*
-  Copyright 2011  Dean Camera (dean [at] fourwalledcubicle [dot] com)
+  Copyright 2012  Dean Camera (dean [at] fourwalledcubicle [dot] com)
 
   Permission to use, copy, modify, distribute, and sell this
   software and its documentation for any purpose is hereby granted
@@ -88,7 +88,7 @@
  *          }
  *      }
  *  \endcode
- * 
+ *
  *  <b>High Level API Example:</b>
  *  \code
  *      // Initialize the TWI driver before first use at 200KHz
@@ -154,10 +154,10 @@
 			 *  or \ref TWI_ADDRESS_WRITE to obtain the device's read and write address respectively.
 			 */
 			#define TWI_DEVICE_ADDRESS_MASK  0xFE
-			
+
 			/** Bit length prescaler for \ref TWI_Init(). This mask multiplies the TWI bit length prescaler by 1. */
 			#define TWI_BIT_PRESCALE_1       ((0 << TWPS1) | (0 << TWPS0))
-			
+
 			/** Bit length prescaler for \ref TWI_Init(). This mask multiplies the TWI bit length prescaler by 4. */
 			#define TWI_BIT_PRESCALE_4       ((0 << TWPS1) | (1 << TWPS0))
 
@@ -166,12 +166,12 @@
 
 			/** Bit length prescaler for \ref TWI_Init(). This mask multiplies the TWI bit length prescaler by 64. */
 			#define TWI_BIT_PRESCALE_64      ((1 << TWPS1) | (1 << TWPS0))
-			
+
 			/** Calculates the length of each bit on the TWI bus for a given target frequency. This may be used with
 			 *  the \ref TWI_Init() function to convert a bus frequency to a number of clocks for the \c BitLength
 			 *  parameter.
 			 *
-			 *  \param[in] Prescaler  Prescaler set on the TWI bus.
+			 *  \param[in] Prescale   Prescaler set on the TWI bus.
 			 *  \param[in] Frequency  Desired TWI bus frequency in Hz.
 			 *
 			 *  \return Bit length in clocks for the given TWI bus frequency at the given prescaler value.
@@ -189,7 +189,7 @@
 				TWI_ERROR_SlaveNotReady        = 4, /**< Slave NAKed the TWI bus START condition. */
 				TWI_ERROR_SlaveNAK             = 5, /**< Slave NAKed whilst attempting to send data to the device. */
 			};
-	
+
 		/* Inline Functions: */
 			/** Initializes the TWI hardware into master mode, ready for data transmission and reception. This must be
 			 *  before any other TWI operations.
@@ -254,9 +254,7 @@
 			 */
 			bool TWI_ReceiveByte(uint8_t* const Byte,
 			                     const bool LastByte) ATTR_NON_NULL_PTR_ARG(1);
-			bool TWI_ReceiveByte(uint8_t* const Byte,
-			                     const bool LastByte);
-					 
+
 			/** High level function to perform a complete packet transfer over the TWI bus to the specified
 			 *  device.
 			 *

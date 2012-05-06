@@ -1,13 +1,13 @@
 /*
              LUFA Library
-     Copyright (C) Dean Camera, 2011.
+     Copyright (C) Dean Camera, 2012.
 
   dean [at] fourwalledcubicle [dot] com
            www.lufa-lib.org
 */
 
 /*
-  Copyright 2011  Dean Camera (dean [at] fourwalledcubicle [dot] com)
+  Copyright 2012  Dean Camera (dean [at] fourwalledcubicle [dot] com)
 
   Permission to use, copy, modify, distribute, and sell this
   software and its documentation for any purpose is hereby granted
@@ -129,6 +129,8 @@
 		/* Inline Functions: */
 			/** Returns the current USB frame number, when in host mode. Every millisecond the USB bus is active (i.e. not suspended)
 			 *  the frame number is incremented by one.
+			 *
+			 *  \return Current USB frame number from the USB controller.
 			 */
 			static inline uint16_t USB_Host_GetFrameNumber(void) ATTR_WARN_UNUSED_RESULT ATTR_ALWAYS_INLINE;
 			static inline uint16_t USB_Host_GetFrameNumber(void)

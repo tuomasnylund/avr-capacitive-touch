@@ -1,13 +1,13 @@
 /*
              LUFA Library
-     Copyright (C) Dean Camera, 2011.
+     Copyright (C) Dean Camera, 2012.
 
   dean [at] fourwalledcubicle [dot] com
            www.lufa-lib.org
 */
 
 /*
-  Copyright 2011  Dean Camera (dean [at] fourwalledcubicle [dot] com)
+  Copyright 2012  Dean Camera (dean [at] fourwalledcubicle [dot] com)
 
   Permission to use, copy, modify, distribute, and sell this
   software and its documentation for any purpose is hereby granted
@@ -54,7 +54,7 @@
 		#include "../StdDescriptors.h"
 		#include "../USBInterrupt.h"
 		#include "../Endpoint.h"
-		
+
 	/* Enable C linkage for C++ Compilers: */
 		#if defined(__cplusplus)
 			extern "C" {
@@ -67,6 +67,14 @@
 
 		#if (defined(USE_RAM_DESCRIPTORS) && defined(USE_EEPROM_DESCRIPTORS))
 			#error USE_RAM_DESCRIPTORS and USE_EEPROM_DESCRIPTORS are mutually exclusive.
+		#endif
+
+		#if (defined(USE_FLASH_DESCRIPTORS) && defined(USE_EEPROM_DESCRIPTORS))
+			#error USE_FLASH_DESCRIPTORS and USE_EEPROM_DESCRIPTORS are mutually exclusive.
+		#endif
+
+		#if (defined(USE_FLASH_DESCRIPTORS) && defined(USE_RAM_DESCRIPTORS))
+			#error USE_FLASH_DESCRIPTORS and USE_RAM_DESCRIPTORS are mutually exclusive.
 		#endif
 
 	/* Public Interface - May be used in end-application: */
@@ -91,10 +99,10 @@
 			 */
 			#define USB_DEVICE_OPT_FULLSPEED               (0 << 0)
 			//@}
-			
+
 			#if (!defined(NO_INTERNAL_SERIAL) && \
-			     (defined(USB_SERIES_7_AVR) || defined(USB_SERIES_6_AVR) || defined(USB_SERIES_4_AVR) || \
-			      (defined(USB_SERIES_2_AVR) && (!defined(__AVR_AT90USB82__) || defined(__AVR_AT90USB162__))) || \
+			     (defined(USB_SERIES_7_AVR) || defined(USB_SERIES_6_AVR) || \
+			      defined(USB_SERIES_4_AVR) || defined(USB_SERIES_2_AVR) || \
 				  defined(__DOXYGEN__)))
 				/** String descriptor index for the device's unique serial number string descriptor within the device.
 				 *  This unique serial number is used by the host to associate resources to the device (such as drivers or COM port
@@ -111,7 +119,7 @@
 				 *  model.
 				 */
 				#define INTERNAL_SERIAL_LENGTH_BITS    80
-				
+
 				/** Start address of the internal serial number, in the appropriate address space, if present on the selected microcontroller
 				 *  model.
 				 */
@@ -121,8 +129,8 @@
 
 				#define INTERNAL_SERIAL_LENGTH_BITS    0
 				#define INTERNAL_SERIAL_START_ADDRESS  0
-			#endif			
-			
+			#endif
+
 		/* Function Prototypes: */
 			/** Sends a Remote Wakeup request to the host. This signals to the host that the device should
 			 *  be taken out of suspended mode, and communications should resume.
@@ -148,6 +156,8 @@
 		/* Inline Functions: */
 			/** Returns the current USB frame number, when in device mode. Every millisecond the USB bus is active (i.e. enumerated to a host)
 			 *  the frame number is incremented by one.
+			 *
+			 *  \return Current USB frame number from the USB controller.
 			 */
 			static inline uint16_t USB_Device_GetFrameNumber(void) ATTR_ALWAYS_INLINE ATTR_WARN_UNUSED_RESULT;
 			static inline uint16_t USB_Device_GetFrameNumber(void)
@@ -211,14 +221,14 @@
 			{
 				return (UDADDR & (1 << ADDEN));
 			}
-		
+
 			#if (USE_INTERNAL_SERIAL != NO_DESCRIPTOR)
 			static inline void USB_Device_GetSerialString(uint16_t* const UnicodeString) ATTR_NON_NULL_PTR_ARG(1);
 			static inline void USB_Device_GetSerialString(uint16_t* const UnicodeString)
 			{
 				uint_reg_t CurrentGlobalInt = GetGlobalInterruptMask();
 				GlobalInterruptDisable();
-				
+
 				uint8_t SigReadAddress = INTERNAL_SERIAL_START_ADDRESS;
 
 				for (uint8_t SerialCharNum = 0; SerialCharNum < (INTERNAL_SERIAL_LENGTH_BITS / 4); SerialCharNum++)
@@ -236,7 +246,7 @@
 					UnicodeString[SerialCharNum] = cpu_to_le16((SerialByte >= 10) ?
 															   (('A' - 10) + SerialByte) : ('0' + SerialByte));
 				}
-				
+
 				SetGlobalInterruptMask(CurrentGlobalInt);
 			}
 			#endif

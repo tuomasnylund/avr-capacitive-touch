@@ -3,7 +3,6 @@
 #include <string.h>
 #include <stdio.h>
 
-
 //avr libs
 #include <avr/io.h>
 #include <util/delay.h>
@@ -19,6 +18,7 @@
 //own stuff
 #include "defines.h"
 #include "touch.h"
+#include "pwm16_rgb.h"
 
 /**********************************************************
  * Function prototypes
@@ -49,18 +49,24 @@ static touch_channel_t btn1 = {
     .mux = 7,
     .port = &PORTF,
     .portmask = (1<<PF7),
+    .min = 500,
+    .max = 700
 };
 
 static touch_channel_t btn2 = {
     .mux = 6,
     .port = &PORTF,
     .portmask = (1<<PF6),
+    .min = 500,
+    .max = 700
 };
 
 static touch_channel_t btn3 = {
     .mux = 5,
     .port = &PORTF,
     .portmask = (1<<PF5),
+    .min = 500,
+    .max = 700
 };
 
 /** LUFA CDC Class driver interface configuration and state 
@@ -101,10 +107,8 @@ int main(void){
 
     //variables
     uint16_t i;
-    uint16_t sample;
+    uint16_t sample[3];
 
-    DDRB |= (1<<PB5) | (1<<PB6);
-    DDRC |= (1<<PC6);
 
     //initialize
     initialize();
@@ -115,18 +119,18 @@ int main(void){
     {
         i++;
         if (i>10000){
+            sample[0] = touch_measure(&btn1);
+            sample[1] = touch_measure(&btn2);
+            sample[2] = touch_measure(&btn3);
+            pwm16_set_values(sample[0],sample[1],sample[2]);
             if(USB_DeviceState == DEVICE_STATE_Configured){
-                sample = touch_measure(&btn1);
-                fprintf(&USBSerialStream,"btn1: %u\t",sample);
-                sample = touch_measure(&btn2);
-                fprintf(&USBSerialStream,"btn2: %u\t",sample);
-                sample = touch_measure(&btn3);
-                fprintf(&USBSerialStream,"btn3: %u\r\n",sample);
+
+                fprintf(&USBSerialStream,"btn1: %u\t",sample[0]);
+                fprintf(&USBSerialStream,"btn2: %u\t",sample[1]);
+                fprintf(&USBSerialStream,"btn3: %u\r\n",sample[2]);
             }
             i=0;
             PORTE ^= (1<<PE2);
-            //PORTB ^= (1<<PB5) | (1<<PB6);
-            //PORTC ^= (1<<PC6);
         }
 
         /**LUFA usb related tasks*/
@@ -154,12 +158,18 @@ void initialize(void){
     //LED
     DDRE |= (1<<PE2);
 
+    //RGB LED
+    DDRB |= (1<<PB5) | (1<<PB6);
+    DDRC |= (1<<PC6);
+
     /** LUFA USB related inits */
 	USB_Init();
 	CDC_Device_CreateBlockingStream
         (&VirtualSerial_CDC_Interface, &USBSerialStream);
 
     touch_init();
+
+    pwm16_rgb_init();
     
     /** enable interrupts*/
     sei();

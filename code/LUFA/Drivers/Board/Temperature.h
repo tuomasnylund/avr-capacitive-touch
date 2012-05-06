@@ -1,13 +1,13 @@
 /*
              LUFA Library
-     Copyright (C) Dean Camera, 2011.
+     Copyright (C) Dean Camera, 2012.
 
   dean [at] fourwalledcubicle [dot] com
            www.lufa-lib.org
 */
 
 /*
-  Copyright 2011  Dean Camera (dean [at] fourwalledcubicle [dot] com)
+  Copyright 2012  Dean Camera (dean [at] fourwalledcubicle [dot] com)
 
   Permission to use, copy, modify, distribute, and sell this
   software and its documentation for any purpose is hereby granted
@@ -60,7 +60,7 @@
  *      // Display converted temperature in degrees Celsius
  *      printf("Current Temperature: %d Degrees\r\n", Temperature_GetTemperature());
  *  \endcode
- * 
+ *
  *  @{
  */
 
@@ -91,7 +91,7 @@
 
 			/** ADC channel MUX mask for the temperature sensor. */
 			#define TEMP_ADC_CHANNEL_MASK  ADC_CHANNEL0
-			
+
 			/** Size of the temperature sensor lookup table, in lookup values */
 			#define TEMP_TABLE_SIZE        120
 

@@ -1,13 +1,13 @@
 /*
              LUFA Library
-     Copyright (C) Dean Camera, 2011.
+     Copyright (C) Dean Camera, 2012.
 
   dean [at] fourwalledcubicle [dot] com
            www.lufa-lib.org
 */
 
 /*
-  Copyright 2011  Dean Camera (dean [at] fourwalledcubicle [dot] com)
+  Copyright 2012  Dean Camera (dean [at] fourwalledcubicle [dot] com)
 
   Permission to use, copy, modify, distribute, and sell this
   software and its documentation for any purpose is hereby granted
@@ -270,13 +270,13 @@
 
 	/* Private Interface - For use in library only: */
 	#if !defined(__DOXYGEN__)
-		/* Macros: */			
+		/* Macros: */
 			#if defined(USB_SERIES_UC3A3_AVR32) || defined(USB_SERIES_UC3A4_AVR32)
 				#define USB_CLOCK_REQUIRED_FREQ  12000000UL
 			#else
 				#define USB_CLOCK_REQUIRED_FREQ  48000000UL
 			#endif
-	
+
 		/* Function Prototypes: */
 			#if defined(__INCLUDE_FROM_USB_CONTROLLER_C)
 				#if defined(USB_CAN_BE_DEVICE)

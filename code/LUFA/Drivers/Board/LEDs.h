@@ -1,13 +1,13 @@
 /*
              LUFA Library
-     Copyright (C) Dean Camera, 2011.
+     Copyright (C) Dean Camera, 2012.
 
   dean [at] fourwalledcubicle [dot] com
            www.lufa-lib.org
 */
 
 /*
-  Copyright 2011  Dean Camera (dean [at] fourwalledcubicle [dot] com)
+  Copyright 2012  Dean Camera (dean [at] fourwalledcubicle [dot] com)
 
   Permission to use, copy, modify, distribute, and sell this
   software and its documentation for any purpose is hereby granted
@@ -78,13 +78,13 @@
  *      LEDs_Init();
  *
  *      // Turn on each of the four LEDs in turn
- *      LEDs_SetAllLEDs(LEDS_LED1); 
+ *      LEDs_SetAllLEDs(LEDS_LED1);
  *      Delay_MS(500);
- *      LEDs_SetAllLEDs(LEDS_LED1); 
+ *      LEDs_SetAllLEDs(LEDS_LED1);
  *      Delay_MS(500);
- *      LEDs_SetAllLEDs(LEDS_LED1); 
+ *      LEDs_SetAllLEDs(LEDS_LED1);
  *      Delay_MS(500);
- *      LEDs_SetAllLEDs(LEDS_LED1); 
+ *      LEDs_SetAllLEDs(LEDS_LED1);
  *      Delay_MS(500);
  *
  *      // Turn on all LEDs
@@ -131,7 +131,7 @@
 			#include "AVR8/BUMBLEB/LEDs.h"
 		#elif (BOARD == BOARD_EVK527)
 			#include "AVR8/EVK527/LEDs.h"
-		#elif (BOARD == BOARD_TEENSY)
+		#elif ((BOARD == BOARD_TEENSY) || (BOARD == BOARD_TEENSY2))
 			#include "AVR8/TEENSY/LEDs.h"
 		#elif (BOARD == BOARD_USBTINYMKII)
 			#include "AVR8/USBTINYMKII/LEDs.h"
@@ -166,11 +166,20 @@
 		#elif (BOARD == BOARD_EVK1101)
 			#include "UC3/EVK1101/LEDs.h"
 		#elif (BOARD == BOARD_TUL)
-			#include "AVR8/TUL/LEDs.h"	
+			#include "AVR8/TUL/LEDs.h"
 		#elif (BOARD == BOARD_EVK1100)
 			#include "UC3/EVK1100/LEDs.h"
 		#elif (BOARD == BOARD_EVK1104)
 			#include "UC3/EVK1104/LEDs.h"
+		#elif (BOARD == BOARD_A3BU_XPLAINED)
+			#include "XMEGA/A3BU_XPLAINED/LEDs.h"
+		#elif ((BOARD == BOARD_USB2AX) || (BOARD == BOARD_USB2AX_V3))
+			#include "AVR8/USB2AX/LEDs.h"
+		#elif ((BOARD == BOARD_MICROPENDOUS_REV1) || (BOARD == BOARD_MICROPENDOUS_REV2) || \
+		       (BOARD == BOARD_MICROPENDOUS_32U2))
+			#include "AVR8/MICROPENDOUS/LEDs.h"
+		#elif (BOARD == BOARD_B1_XPLAINED)
+			#include "XMEGA/B1_XPLAINED/LEDs.h"
 		#else
 			#include "Board/LEDs.h"
 		#endif
@@ -200,6 +209,9 @@
 		 *  I/O pins as outputs, and sets the LEDs to default to off.
 		 */
 		static inline void LEDs_Init(void);
+
+		/** Disables the board LED driver, releasing the I/O pins back to their default high-impedence input mode. */
+		static inline void LEDs_Disable(void);
 
 		/** Turns on the LEDs specified in the given LED mask.
 		 *

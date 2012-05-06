@@ -1,13 +1,13 @@
 /*
              LUFA Library
-     Copyright (C) Dean Camera, 2011.
+     Copyright (C) Dean Camera, 2012.
 
   dean [at] fourwalledcubicle [dot] com
            www.lufa-lib.org
 */
 
 /*
-  Copyright 2011  Dean Camera (dean [at] fourwalledcubicle [dot] com)
+  Copyright 2012  Dean Camera (dean [at] fourwalledcubicle [dot] com)
 
   Permission to use, copy, modify, distribute, and sell this
   software and its documentation for any purpose is hereby granted
@@ -35,8 +35,8 @@
  *  of the various clocks within the device to clock the various peripherals.
  */
 
-/** \ingroup Group_PlatformDrivers
- *  \defgroup Group_PlatformDrivers_UC3Clocks UC3 Clock Management Driver - LUFA/Platform/UC3/ClockManagement.h
+/** \ingroup Group_PlatformDrivers_UC3
+ *  \defgroup Group_PlatformDrivers_UC3Clocks Clock Management Driver - LUFA/Platform/UC3/ClockManagement.h
  *  \brief Module Clock Driver for the AVR32 UC3 microcontrollers.
  *
  *  \section Sec_Dependencies Module Source Dependencies
@@ -55,7 +55,7 @@
  *		{
  *			// Start the master external oscillator which will be used as the main clock reference
  *			AVR32CLK_StartExternalOscillator(0, EXOSC_MODE_8MHZ_OR_MORE, EXOSC_START_0CLK);
- *			
+ *
  *			// Start the PLL for the CPU clock, switch CPU to it
  *			AVR32CLK_StartPLL(0, CLOCK_SRC_OSC0, 12000000, F_CPU);
  *			AVR32CLK_SetCPUClockSource(CLOCK_SRC_PLL0, F_CPU);
@@ -88,7 +88,7 @@
 				EXOSC_MODE_900KHZ_MAX    = AVR32_PM_OSCCTRL0_MODE_CRYSTAL_G0, /**< External crystal oscillator equal to or slower than 900KHz. */
 				EXOSC_MODE_3MHZ_MAX      = AVR32_PM_OSCCTRL0_MODE_CRYSTAL_G1, /**< External crystal oscillator equal to or slower than 3MHz. */
 				EXOSC_MODE_8MHZ_MAX      = AVR32_PM_OSCCTRL0_MODE_CRYSTAL_G2, /**< External crystal oscillator equal to or slower than 8MHz. */
-				EXOSC_MODE_8MHZ_OR_MORE  = AVR32_PM_OSCCTRL0_MODE_CRYSTAL_G3, /**< External crystal oscillator equal to or faster than 8MHz. */		
+				EXOSC_MODE_8MHZ_OR_MORE  = AVR32_PM_OSCCTRL0_MODE_CRYSTAL_G3, /**< External crystal oscillator equal to or faster than 8MHz. */
 			};
 
 			/** Enum for the possible external oscillator statup times. */
@@ -102,7 +102,7 @@
 				EXOSC_START_8192CLK      = AVR32_PM_OSCCTRL0_STARTUP_8192_RCOSC,  /**< Wait 8192 clock cyles before startup for stability. */
 				EXOSC_START_16384CLK     = AVR32_PM_OSCCTRL0_STARTUP_16384_RCOSC, /**< Wait 16384 clock cyles before startup for stability. */
 			};
-			
+
 			/** Enum for the possible module clock sources. */
 			enum UC3_System_ClockSource_t
 			{
@@ -182,7 +182,7 @@
 			{
 				if (SourceFreq > Frequency)
 				  return false;
-			
+
 				switch (Source)
 				{
 					case CLOCK_SRC_OSC0:
@@ -212,7 +212,7 @@
 			{
 				AVR32_PM.PLL[Channel].pllen = false;
 			}
-			
+
 			/** Starts the given Generic Clock of the UC3 microcontroller, with the given options.
 			 *
 			 *  \param[in] Channel     Index of the Generic Clock to start.
@@ -252,17 +252,17 @@
 					default:
 						return false;
 				}
-				
+
 				if (SourceFreq < Frequency)
 				  return false;
 
 				AVR32_PM.GCCTRL[Channel].diven = (SourceFreq > Frequency) ? true : false;
 				AVR32_PM.GCCTRL[Channel].div   = (((SourceFreq / Frequency) - 1) / 2);
 				AVR32_PM.GCCTRL[Channel].cen   = true;
-				
+
 				return true;
 			}
-			
+
 			/** Stops the given generic clock of the UC3 microcontroller.
 			 *
 			 *  \param[in] Channel  Index of the generic clock to stop.
@@ -272,7 +272,7 @@
 			{
 				AVR32_PM.GCCTRL[Channel].cen = false;
 			}
-			
+
 			/** Sets the clock source for the main microcontroller core. The given clock source should be configured
 			 *  and ready for use before this function is called.
 			 *
@@ -310,7 +310,7 @@
 					default:
 						return false;
 				}
-				
+
 				return true;
 			}
 
@@ -322,3 +322,4 @@
 #endif
 
 /** @} */
+

@@ -3,8 +3,10 @@
 
 typedef struct {
     volatile uint8_t *port;
-    uint8_t portmask;
-    uint8_t mux;
+    volatile uint8_t portmask;
+    volatile uint8_t mux;
+    uint16_t min;
+    uint16_t max;
 } touch_channel_t;
 
 void touch_init(void);

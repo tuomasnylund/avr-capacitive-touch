@@ -1,13 +1,13 @@
 /*
              LUFA Library
-     Copyright (C) Dean Camera, 2011.
+     Copyright (C) Dean Camera, 2012.
 
   dean [at] fourwalledcubicle [dot] com
            www.lufa-lib.org
 */
 
 /*
-  Copyright 2011  Dean Camera (dean [at] fourwalledcubicle [dot] com)
+  Copyright 2012  Dean Camera (dean [at] fourwalledcubicle [dot] com)
 
   Permission to use, copy, modify, distribute, and sell this
   software and its documentation for any purpose is hereby granted
@@ -98,7 +98,7 @@ uint8_t USB_ProcessHIDReport(const uint8_t* ReportData,
 			case HID_RI_USAGE_PAGE(0):
 				if ((HIDReportItem & HID_RI_DATA_SIZE_MASK) == HID_RI_DATA_BITS_32)
 				  CurrStateTable->Attributes.Usage.Page = (ReportItemData >> 16);
-				
+
 				CurrStateTable->Attributes.Usage.Page       = ReportItemData;
 				break;
 			case HID_RI_LOGICAL_MINIMUM(0):
@@ -359,3 +359,4 @@ uint16_t USB_GetHIDReportSize(HID_ReportInfo_t* const ParserData,
 
 	return 0;
 }
+

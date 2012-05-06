@@ -1,13 +1,13 @@
 /*
              LUFA Library
-     Copyright (C) Dean Camera, 2011.
+     Copyright (C) Dean Camera, 2012.
 
   dean [at] fourwalledcubicle [dot] com
            www.lufa-lib.org
 */
 
 /*
-  Copyright 2011  Dean Camera (dean [at] fourwalledcubicle [dot] com)
+  Copyright 2012  Dean Camera (dean [at] fourwalledcubicle [dot] com)
 
   Permission to use, copy, modify, distribute, and sell this
   software and its documentation for any purpose is hereby granted
@@ -112,35 +112,35 @@
 				 *  identical name (in which case the weak reference is discarded at link time).
 				 */
 				#define ATTR_WEAK                   __attribute__ ((weak))
-
-				/** Forces the compiler to not automatically zero the given global variable on startup, so that the
-				 *  current RAM contents is retained. Under most conditions this value will be random due to the
-				 *  behaviour of volatile memory once power is removed, but may be used in some specific circumstances,
-				 *  like the passing of values back after a system watchdog reset.
-				 */
-				#define ATTR_NO_INIT                __attribute__ ((section (".noinit")))
 			#endif
+
+			/** Forces the compiler to not automatically zero the given global variable on startup, so that the
+			 *  current RAM contents is retained. Under most conditions this value will be random due to the
+			 *  behaviour of volatile memory once power is removed, but may be used in some specific circumstances,
+			 *  like the passing of values back after a system watchdog reset.
+			 */
+			#define ATTR_NO_INIT                    __attribute__ ((section (".noinit")))
 
 			/** Places the function in one of the initialization sections, which execute before the main function
 			 *  of the application. Refer to the avr-libc manual for more information on the initialization sections.
 			 *
 			 *  \param[in] SectionIndex  Initialization section number where the function should be placed.
 			 */
-			#define ATTR_INIT_SECTION(SectionIndex) __attribute__ ((naked, section (".init" #SectionIndex )))
+			#define ATTR_INIT_SECTION(SectionIndex) __attribute__ ((used, naked, section (".init" #SectionIndex )))
 
 			/** Marks a function as an alias for another function.
 			 *
 			 *  \param[in] Func  Name of the function which the given function name should alias.
 			 */
 			#define ATTR_ALIAS(Func)               __attribute__ ((alias( #Func )))
-			
+
 			/** Marks a variable or struct element for packing into the smallest space available, omitting any
 			 *  alignment bytes usually added between fields to optimize field accesses.
 			 */
 			#define ATTR_PACKED                     __attribute__ ((packed))
 
 			/** Indicates the minimum alignment in bytes for a variable or struct element.
-			 * 
+			 *
 			 *  \param[in] Bytes  Minimum number of bytes the item should be aligned to.
 			 */
 			#define ATTR_ALIGNED(Bytes)            __attribute__ ((aligned(Bytes)))

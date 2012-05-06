@@ -1,13 +1,13 @@
 /*
              LUFA Library
-     Copyright (C) Dean Camera, 2011.
+     Copyright (C) Dean Camera, 2012.
 
   dean [at] fourwalledcubicle [dot] com
            www.lufa-lib.org
 */
 
 /*
-  Copyright 2011  Dean Camera (dean [at] fourwalledcubicle [dot] com)
+  Copyright 2012  Dean Camera (dean [at] fourwalledcubicle [dot] com)
 
   Permission to use, copy, modify, distribute, and sell this
   software and its documentation for any purpose is hereby granted
@@ -59,7 +59,7 @@ void USB_Init(
 	#if !defined(USE_STATIC_OPTIONS)
 	USB_Options = Options;
 	#endif
-	
+
 	#if defined(USB_CAN_BE_BOTH)
 	if (Mode == USB_MODE_UID)
 	{
@@ -73,7 +73,7 @@ void USB_Init(
 		USB_CurrentMode = Mode;
 	}
 	#else
-	AVR32_USBB.USBCON.uide = false;	
+	AVR32_USBB.USBCON.uide = false;
 	#endif
 
 	USB_IsInitialized = true;
@@ -134,6 +134,10 @@ void USB_ResetInterface(void)
 	}
 	else if (USB_CurrentMode == USB_MODE_Host)
 	{
+		#if defined(INVERTED_VBUS_ENABLE_LINE)
+		AVR32_USBB.USBCON.vbuspol = true;
+		#endif
+		
 		#if defined(USB_CAN_BE_HOST)
 		AVR32_USBB.USBCON.uimod = false;
 
@@ -172,13 +176,13 @@ static void USB_Init_Device(void)
 	else
 	{
 		#if defined(USB_DEVICE_OPT_HIGHSPEED)
-		if (USB_Options & USB_DEVICE_OPT_HIGHSPEED)	
+		if (USB_Options & USB_DEVICE_OPT_HIGHSPEED)
 		  USB_Device_SetHighSpeed();
 		else
 		  USB_Device_SetFullSpeed();
 		#else
 		USB_Device_SetFullSpeed();
-		#endif		
+		#endif
 	}
 
 	USB_INT_Enable(USB_INT_VBUSTI);

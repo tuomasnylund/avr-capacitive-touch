@@ -1,18 +1,18 @@
 /*
              LUFA Library
-     Copyright (C) Dean Camera, 2011.
-              
+     Copyright (C) Dean Camera, 2012.
+
   dean [at] fourwalledcubicle [dot] com
-      www.fourwalledcubicle.com
+           www.lufa-lib.org
 */
 
 /*
-  Copyright 2011  Dean Camera (dean [at] fourwalledcubicle [dot] com)
+  Copyright 2012  Dean Camera (dean [at] fourwalledcubicle [dot] com)
 
-  Permission to use, copy, modify, and distribute this software
-  and its documentation for any purpose and without fee is hereby
-  granted, provided that the above copyright notice appear in all
-  copies and that both that the copyright notice and this
+  Permission to use, copy, modify, distribute, and sell this
+  software and its documentation for any purpose is hereby granted
+  without fee, provided that the above copyright notice appear in
+  all copies and that both that the copyright notice and this
   permission notice and warranty disclaimer appear in supporting
   documentation, and that the name of the author not be used in
   advertising or publicity pertaining to distribution of the
@@ -92,7 +92,7 @@
 
 			/** LED mask for the eighth LED on the board. */
 			#define LEDS_LED8        (1UL << 30)
-			
+
 			/** LED mask for all the LEDs on the board. */
 			#define LEDS_ALL_LEDS    (LEDS_LED1 | LEDS_LED2 | LEDS_LED3 | LEDS_LED4 \
 			                          LEDS_LED5 | LEDS_LED6 | LEDS_LED7 | LEDS_LED8)
@@ -108,7 +108,14 @@
 				AVR32_GPIO.port[LEDS_PORT].oders = LEDS_ALL_LEDS;
 				AVR32_GPIO.port[LEDS_PORT].ovrs  = LEDS_ALL_LEDS;
 			}
-			
+
+			static inline void LEDs_Disable(void)
+			{
+				AVR32_GPIO.port[LEDS_PORT].gperc = LEDS_ALL_LEDS;
+				AVR32_GPIO.port[LEDS_PORT].oderc = LEDS_ALL_LEDS;
+				AVR32_GPIO.port[LEDS_PORT].ovrc  = LEDS_ALL_LEDS;
+			}
+
 			static inline void LEDs_TurnOnLEDs(const uint32_t LEDMask)
 			{
 				AVR32_GPIO.port[LEDS_PORT].ovrc  = LEDMask;
@@ -124,7 +131,7 @@
 				AVR32_GPIO.port[LEDS_PORT].ovrs  = LEDS_ALL_LEDS;
 				AVR32_GPIO.port[LEDS_PORT].ovrc  = LEDMask;
 			}
-			
+
 			static inline void LEDs_ChangeLEDs(const uint32_t LEDMask, const uint32_t ActiveMask)
 			{
 				AVR32_GPIO.port[LEDS_PORT].ovrs  = LEDMask;
@@ -135,7 +142,7 @@
 			{
 				AVR32_GPIO.port[LEDS_PORT].ovrt  = LEDMask;
 			}
-			
+
 			static inline uint32_t LEDs_GetLEDs(void) ATTR_WARN_UNUSED_RESULT;
 			static inline uint32_t LEDs_GetLEDs(void)
 			{
@@ -147,7 +154,8 @@
 		#if defined(__cplusplus)
 			}
 		#endif
-		
+
 #endif
 
 /** @} */
+

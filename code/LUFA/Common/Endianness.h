@@ -1,13 +1,13 @@
 /*
              LUFA Library
-     Copyright (C) Dean Camera, 2011.
+     Copyright (C) Dean Camera, 2012.
 
   dean [at] fourwalledcubicle [dot] com
            www.lufa-lib.org
 */
 
 /*
-  Copyright 2011  Dean Camera (dean [at] fourwalledcubicle [dot] com)
+  Copyright 2012  Dean Camera (dean [at] fourwalledcubicle [dot] com)
 
   Permission to use, copy, modify, distribute, and sell this
   software and its documentation for any purpose is hereby granted
@@ -65,7 +65,7 @@
 		#if !defined(__INCLUDE_FROM_COMMON_H)
 			#error Do not include this file directly. Include LUFA/Common/Common.h instead to gain this functionality.
 		#endif
-		
+
 		#if !(defined(ARCH_BIG_ENDIAN) || defined(ARCH_LITTLE_ENDIAN))
 			#error ARCH_BIG_ENDIAN or ARCH_LITTLE_ENDIAN not set for the specified architecture.
 		#endif
@@ -115,11 +115,11 @@
 				#define CPU_TO_LE16(x)           SWAPENDIAN_16(x)
 				#define CPU_TO_LE32(x)           SWAPENDIAN_32(x)
 				#define CPU_TO_BE16(x)           (x)
-				#define CPU_TO_BE32(x)           (x)			
+				#define CPU_TO_BE32(x)           (x)
 			#elif !defined(le16_to_cpu)
 				/** \name Run-time endianness conversion */
 				//@{
-			
+
 				/** Performs a conversion between a Little Endian encoded 16-bit piece of data and the
 				 *  Endianness of the currently selected CPU architecture.
 				 *
@@ -390,13 +390,15 @@
 			 *  \ingroup Group_ByteSwapping
 			 *
 			 *  \param[in] Word  Word of data whose bytes are to be swapped.
+			 *
+			 *  \return Input data with the individual bytes reversed.
 			 */
 			static inline uint16_t SwapEndian_16(const uint16_t Word) ATTR_WARN_UNUSED_RESULT ATTR_CONST;
 			static inline uint16_t SwapEndian_16(const uint16_t Word)
 			{
 				if (GCC_IS_COMPILE_CONST(Word))
 				  return SWAPENDIAN_16(Word);
-			
+
 				uint8_t Temp;
 
 				union
@@ -419,6 +421,8 @@
 			 *  \ingroup Group_ByteSwapping
 			 *
 			 *  \param[in] DWord  Double word of data whose bytes are to be swapped.
+			 *
+			 *  \return Input data with the individual bytes reversed.
 			 */
 			static inline uint32_t SwapEndian_32(const uint32_t DWord) ATTR_WARN_UNUSED_RESULT ATTR_CONST;
 			static inline uint32_t SwapEndian_32(const uint32_t DWord)
@@ -453,6 +457,8 @@
 			 *
 			 *  \param[in,out] Data    Pointer to a number containing an even number of bytes to be reversed.
 			 *  \param[in]     Length  Length of the data in bytes.
+			 *
+			 *  \return Input data with the individual bytes reversed.
 			 */
 			static inline void SwapEndian_n(void* const Data,
 			                                uint8_t Length) ATTR_NON_NULL_PTR_ARG(1);
@@ -480,3 +486,4 @@
 #endif
 
 /** @} */
+

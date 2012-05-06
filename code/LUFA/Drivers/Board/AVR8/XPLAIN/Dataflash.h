@@ -1,13 +1,13 @@
 /*
              LUFA Library
-     Copyright (C) Dean Camera, 2011.
+     Copyright (C) Dean Camera, 2012.
 
   dean [at] fourwalledcubicle [dot] com
            www.lufa-lib.org
 */
 
 /*
-  Copyright 2011  Dean Camera (dean [at] fourwalledcubicle [dot] com)
+  Copyright 2012  Dean Camera (dean [at] fourwalledcubicle [dot] com)
 
   Permission to use, copy, modify, distribute, and sell this
   software and its documentation for any purpose is hereby granted
@@ -29,7 +29,7 @@
 */
 
 /** \file
- *  \brief Board specific Dataflash driver header for the Atmel XPLAIN.
+ *  \brief Board specific Dataflash driver header for the original Atmel XPLAIN.
  *  \copydetails Group_Dataflash_XPLAIN
  *
  *  \note This file should not be included directly. It is automatically included as needed by the dataflash driver
@@ -37,8 +37,17 @@
  */
 
 /** \ingroup Group_Dataflash
+ *  \defgroup Group_Dataflash_XPLAIN_REV1 XPLAIN_REV1
+ *  \brief Board specific Dataflash driver header for the original Atmel XPLAIN, revision 1.
+ *
+ *  See \ref Group_Dataflash_XPLAIN for more details.
+ */
+
+/** \ingroup Group_Dataflash
  *  \defgroup Group_Dataflash_XPLAIN XPLAIN
- *  \brief Board specific Dataflash driver header for the Atmel XPLAIN.
+ *  \brief Board specific Dataflash driver header for the original Atmel XPLAIN.
+ *
+ *  \note For the first revision XPLAIN board, compile with <code>BOARD = BOARD_XPLAIN_REV1</code>.
  *
  *  Board specific Dataflash driver header for the Atmel XPLAIN.
  *
@@ -51,6 +60,7 @@
 	/* Includes: */
 		#include "../../../../Common/Common.h"
 		#include "../../../Misc/AT45DB642D.h"
+		#include "../../../Peripheral/SPI.h"
 
 	/* Preprocessor Checks: */
 		#if !defined(__INCLUDE_FROM_DATAFLASH_H)
@@ -76,16 +86,16 @@
 			/** Mask for the first dataflash chip selected. */
 			#define DATAFLASH_CHIP1                      0
 
-			#if (BOARD == BOARD_XPLAIN_REV1)
-				#define DATAFLASH_PAGE_SIZE              256
-
-				#define DATAFLASH_PAGES                  2048
-			#else
+			#if ((BOARD != BOARD_XPLAIN_REV1) || defined(__DOXYGEN__))
 				/** Internal main memory page size for the board's dataflash ICs. */
 				#define DATAFLASH_PAGE_SIZE              1024
 
 				/** Total number of pages inside each of the board's dataflash ICs. */
 				#define DATAFLASH_PAGES                  8192
+			#else
+				#define DATAFLASH_PAGE_SIZE              256
+
+				#define DATAFLASH_PAGES                  2048
 			#endif
 
 		/* Inline Functions: */
@@ -96,6 +106,38 @@
 			{
 				DATAFLASH_CHIPCS_DDR  |= DATAFLASH_CHIPCS_MASK;
 				DATAFLASH_CHIPCS_PORT |= DATAFLASH_CHIPCS_MASK;
+			}
+
+			/** Sends a byte to the currently selected dataflash IC, and returns a byte from the dataflash.
+			 *
+			 *  \param[in] Byte  Byte of data to send to the dataflash
+			 *
+			 *  \return Last response byte from the dataflash
+			 */
+			static inline uint8_t Dataflash_TransferByte(const uint8_t Byte) ATTR_ALWAYS_INLINE;
+			static inline uint8_t Dataflash_TransferByte(const uint8_t Byte)
+			{
+				return SPI_TransferByte(Byte);
+			}
+
+			/** Sends a byte to the currently selected dataflash IC, and ignores the next byte from the dataflash.
+			 *
+			 *  \param[in] Byte  Byte of data to send to the dataflash
+			 */
+			static inline void Dataflash_SendByte(const uint8_t Byte) ATTR_ALWAYS_INLINE;
+			static inline void Dataflash_SendByte(const uint8_t Byte)
+			{
+				SPI_SendByte(Byte);
+			}
+
+			/** Sends a dummy byte to the currently selected dataflash IC, and returns the next byte from the dataflash.
+			 *
+			 *  \return Last response byte from the dataflash
+			 */
+			static inline uint8_t Dataflash_ReceiveByte(void) ATTR_ALWAYS_INLINE ATTR_WARN_UNUSED_RESULT;
+			static inline uint8_t Dataflash_ReceiveByte(void)
+			{
+				return SPI_ReceiveByte();
 			}
 
 			/** Determines the currently selected dataflash chip.
