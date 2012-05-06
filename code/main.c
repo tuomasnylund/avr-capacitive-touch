@@ -45,6 +45,24 @@ extern volatile uint8_t USB_DeviceState;
  * Global variables
  **********************************************************/
 
+static touch_channel_t btn1 = {
+    .mux = 7,
+    .port = &PORTF,
+    .portmask = (1<<PF7),
+};
+
+static touch_channel_t btn2 = {
+    .mux = 6,
+    .port = &PORTF,
+    .portmask = (1<<PF6),
+};
+
+static touch_channel_t btn3 = {
+    .mux = 5,
+    .port = &PORTF,
+    .portmask = (1<<PF5),
+};
+
 /** LUFA CDC Class driver interface configuration and state 
  *  information. This structure is passed to all CDC Class 
  *  driver functions, so that multiple instances of the same 
@@ -84,7 +102,6 @@ int main(void){
     //variables
     uint16_t i;
     uint16_t sample;
-    //char sBuffer[STRBUFLEN]; //!< character buffer for usb serial
 
     DDRB |= (1<<PB5) | (1<<PB6);
     DDRC |= (1<<PC6);
@@ -99,13 +116,17 @@ int main(void){
         i++;
         if (i>10000){
             if(USB_DeviceState == DEVICE_STATE_Configured){
-                sample = touch_measure(1);
-                fprintf(&USBSerialStream,"value: %u\t average: nothing!\r\n",sample);
+                sample = touch_measure(&btn1);
+                fprintf(&USBSerialStream,"btn1: %u\t",sample);
+                sample = touch_measure(&btn2);
+                fprintf(&USBSerialStream,"btn2: %u\t",sample);
+                sample = touch_measure(&btn3);
+                fprintf(&USBSerialStream,"btn3: %u\r\n",sample);
             }
             i=0;
             PORTE ^= (1<<PE2);
-            PORTB ^= (1<<PB5) | (1<<PB6);
-            PORTC ^= (1<<PC6);
+            //PORTB ^= (1<<PB5) | (1<<PB6);
+            //PORTC ^= (1<<PC6);
         }
 
         /**LUFA usb related tasks*/
@@ -124,26 +145,6 @@ int main(void){
 /**********************************************************
  * Other functions
  **********************************************************/
-
-/*
-uint16_t moving_average(uint16_t new){
-    static uint16_t samples[16];
-    static uint8_t i = 0;
-
-    uint8_t j = 0;
-    uint32_t retval = 0;
- 
-    samples[i++] = new;
-    i %= 16;
-
-    for(j=0 ; j<16 ; j++)
-        retval += samples[j];
-
-    return retval/16;
-
-}
-*/
-
 
 /** Initializes all of the hardware. */
 void initialize(void){

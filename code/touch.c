@@ -9,14 +9,6 @@
 
 #include "touch.h"
 
-/*
-static touch_channel_t btn1 = {
-    .mux = ADC5;
-    .port = PORTF;
-    .ddr = DDRF;
-    .bit = PF7;
-};
-*/
 
 static inline void adc_channel(uint8_t channel){
     ADMUX &= ~(0b11111);
@@ -42,29 +34,26 @@ void touch_init(void){
 }
 
 
-uint16_t touch_measure(uint8_t channel){
+uint16_t touch_measure(touch_channel_t *channel){
     uint8_t i;
     uint16_t retval;
 
     retval = 0;
 
-
-
-    adc_channel(7);
     for (i=0 ; i<8 ; i++){
-        PORTF  |= (1<<PF6);
+        *(channel->port) |= channel->portmask;
+        //PORTF  |= (1<<PF6);
         _delay_ms(1);
-        PORTF &= ~(1<<PF6);
-        DIDR0 |= (1<<ADC6D);
+        //PORTF &= ~(1<<PF6);
+        *(channel->port) &= ~(channel->portmask);
 
         adc_channel(0b11111); //set ADC mux to ground;
         adc_get();
 
-        adc_channel(6);
+        //adc_channel(6);
+        adc_channel(channel->mux);
         retval +=  adc_get();
     }
 
-    DIDR0 &= ~(1<<ADC6D);
-
-    return retval;
+    return retval/8;
 }
