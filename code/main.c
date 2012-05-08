@@ -50,7 +50,7 @@ static touch_channel_t btn1 = {
     .port = &PORTF,
     .portmask = (1<<PF7),
     .min = 500,
-    .max = 700
+    .max = 800
 };
 
 static touch_channel_t btn2 = {
@@ -58,15 +58,15 @@ static touch_channel_t btn2 = {
     .port = &PORTF,
     .portmask = (1<<PF6),
     .min = 500,
-    .max = 700
+    .max = 800
 };
 
 static touch_channel_t btn3 = {
     .mux = 5,
     .port = &PORTF,
     .portmask = (1<<PF5),
-    .min = 500,
-    .max = 700
+    .min = 520,
+    .max = 820
 };
 
 /** LUFA CDC Class driver interface configuration and state 
