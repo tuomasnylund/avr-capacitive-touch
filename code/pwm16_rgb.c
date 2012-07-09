@@ -82,7 +82,7 @@ void pwm16_set_values(uint16_t red, uint16_t green, uint16_t blue){
     pwm16_blue  = blue;
 }
 
-void pwm15_set_smooth_step(uint16_t smoothness){
+void pwm16_set_smooth_step(uint16_t smoothness){
     smooth_step = smoothness;
 }
 
