@@ -13,7 +13,7 @@ www.fourwalledcubicle.com/LUFA.php
 
 folders:
 code - contains code for the AVR
-pcb - PCB designs for the function generator
+pcb - PCB designs 
 documentation - some random files about the project
 
 licenses:
