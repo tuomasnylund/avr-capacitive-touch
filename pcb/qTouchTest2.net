@@ -1,0 +1,543 @@
+# EESchema Netlist Version 1.1 created  Fri 04 May 2012 01:08:55 PM EEST
+(
+ ( /4FA3A273 $noname  R11 1k {Lib=R}
+  (    1 N-000015 )
+  (    2 N-000033 )
+ )
+ ( /4FA3A272 $noname  R10 1k {Lib=R}
+  (    1 N-000013 )
+  (    2 N-000027 )
+ )
+ ( /4FA3A270 $noname  R9 1k {Lib=R}
+  (    1 N-000011 )
+  (    2 N-000028 )
+ )
+ ( /4FA3A26E $noname  R15 1k {Lib=R}
+  (    1 N-000009 )
+  (    2 /S4 )
+ )
+ ( /4FA3A26C $noname  R14 1k {Lib=R}
+  (    1 N-000051 )
+  (    2 /S3 )
+ )
+ ( /4FA3A26B $noname  R13 1k {Lib=R}
+  (    1 N-000014 )
+  (    2 /S2 )
+ )
+ ( /4FA3A266 $noname  R12 1k {Lib=R}
+  (    1 N-000046 )
+  (    2 /S1 )
+ )
+ ( /4FA3A208 $noname  K1 CONN_3 {Lib=CONN_3}
+  (    1 N-000034 )
+  (    2 N-000036 )
+  (    3 GND )
+ )
+ ( /4FA3A1D2 $noname  L1 INDUCTOR {Lib=INDUCTOR}
+  (    1 +5V )
+  (    2 N-000017 )
+ )
+ ( /4F96AC0F $noname  R8 1k {Lib=R}
+  (    1 /LED_B )
+  (    2 N-000049 )
+ )
+ ( /4F96AC0E $noname  R7 1k {Lib=R}
+  (    1 /LED_R )
+  (    2 N-000007 )
+ )
+ ( /4F96AC0B $noname  R6 1k {Lib=R}
+  (    1 /LED_G )
+  (    2 N-000047 )
+ )
+ ( /4F96ABFC $noname  D3 LED_RGB_SMT {Lib=LED_RGB_SMT}
+  (    1 N-000049 )
+  (    2 N-000007 )
+  (    3 N-000047 )
+  (    4 GND )
+  (    5 GND )
+  (    6 GND )
+ )
+ ( /4F96768D $noname  C2 100n {Lib=C}
+  (    1 +5V )
+  (    2 GND )
+ )
+ ( /4F96768C $noname  C3 100n {Lib=C}
+  (    1 GND )
+  (    2 N-000017 )
+ )
+ ( /4F96768B $noname  C4 100n {Lib=C}
+  (    1 +5V )
+  (    2 GND )
+ )
+ ( /4F96768A $noname  C6 100n {Lib=C}
+  (    1 +5V )
+  (    2 GND )
+ )
+ ( /4F967642 $noname  C5 C5 {Lib=C}
+  (    1 N-000024 )
+  (    2 GND )
+ )
+ ( /4F96762E $noname  R1 10k {Lib=R}
+  (    1 +5V )
+  (    2 /ISP_RST )
+ )
+ ( /4F9675E7 AVR-ISP-6  CON1 AVR-ISP-6 {Lib=AVR-ISP-6}
+  (    1 /ISP_MISO )
+  (    2 +5V )
+  (    3 /ISP_SCK )
+  (    4 /ISP_MOSI )
+  (    5 /ISP_RST )
+  (    6 GND )
+ )
+ ( /4F9675C7 $noname  C10 12p {Lib=C}
+  (    1 N-000001 )
+  (    2 GND )
+ )
+ ( /4F9675C5 $noname  C9 12p {Lib=C}
+  (    1 N-000002 )
+  (    2 GND )
+ )
+ ( /4F9675BE $noname  X1 CRYSTAL {Lib=CRYSTAL}
+  (    1 N-000002 )
+  (    2 N-000001 )
+ )
+ ( /4F96759D $noname  C8 100n {Lib=C}
+  (    1 GND )
+  (    2 N-000018 )
+ )
+ ( /4F96754F $noname  C1 2u2 {Lib=C}
+  (    1 +5V )
+  (    2 GND )
+ )
+ ( /4F96737F $noname  D2 LED {Lib=LED}
+  (    1 N-000030 )
+  (    2 GND )
+ )
+ ( /4F96737D $noname  D1 LED {Lib=LED}
+  (    1 N-000032 )
+  (    2 GND )
+ )
+ ( /4F96735E $noname  R5 2k {Lib=R}
+  (    1 /LED2 )
+  (    2 N-000030 )
+ )
+ ( /4F96735A $noname  R4 2k {Lib=R}
+  (    1 /LED1 )
+  (    2 N-000032 )
+ )
+ ( /4F967357 $noname  P1 CONN_1 {Lib=CONN_1}
+  (    1 N-000028 )
+ )
+ ( /4F967353 $noname  P2 CONN_1 {Lib=CONN_1}
+  (    1 N-000027 )
+ )
+ ( /4F967350 $noname  P3 CONN_1 {Lib=CONN_1}
+  (    1 N-000033 )
+ )
+ ( /4F967349 $noname  P9 CONN_1 {Lib=CONN_1}
+  (    1 /S4 )
+ )
+ ( /4F967348 $noname  P8 CONN_1 {Lib=CONN_1}
+  (    1 /S3 )
+ )
+ ( /4F967345 $noname  P7 CONN_1 {Lib=CONN_1}
+  (    1 /S2 )
+ )
+ ( /4F967344 $noname  P6 CONN_1 {Lib=CONN_1}
+  (    1 /S1 )
+ )
+ ( /4F967322 $noname  R3 22R {Lib=R}
+  (    1 N-000040 )
+  (    2 N-000039 )
+ )
+ ( /4F96731E $noname  R2 22R {Lib=R}
+  (    1 N-000038 )
+  (    2 N-000037 )
+ )
+ ( /4F96731C $noname  J1 USB-MINI-B {Lib=USB-MINI-B}
+  (    1 +5V )
+  (    2 N-000038 )
+  (    3 N-000039 )
+  (    4 ? )
+  (    5 GND )
+ )
+ ( /4F96729F $noname  U2 ATMEGA32U4 {Lib=ATMEGA32U4}
+  (    1 ? )
+  (    2 +5V )
+  (    3 N-000037 )
+  (    4 N-000040 )
+  (    5 GND )
+  (    6 N-000024 )
+  (    7 +5V )
+  (    8 ? )
+  (    9 /ISP_SCK )
+  (   10 /ISP_MOSI )
+  (   11 /ISP_MISO )
+  (   12 ? )
+  (   13 /ISP_RST )
+  (   14 +5V )
+  (   15 GND )
+  (   16 N-000002 )
+  (   17 N-000001 )
+  (   18 ? )
+  (   19 ? )
+  (   20 N-000036 )
+  (   21 N-000034 )
+  (   22 ? )
+  (   23 GND )
+  (   24 +5V )
+  (   25 N-000009 )
+  (   26 N-000051 )
+  (   27 N-000014 )
+  (   28 N-000046 )
+  (   29 /LED_G )
+  (   30 /LED_R )
+  (   31 /LED_B )
+  (   32 /LED2 )
+  (   33 /LED1 )
+  (   34 +5V )
+  (   35 GND )
+  (   36 N-000015 )
+  (   37 N-000013 )
+  (   38 N-000011 )
+  (   39 ? )
+  (   40 ? )
+  (   41 ? )
+  (   42 N-000018 )
+  (   43 GND )
+  (   44 N-000017 )
+ )
+)
+*
+{ Allowed footprints by component:
+$component R11
+ R?
+ SM0603
+ SM0805
+ R?-*
+ SM1206
+$endlist
+$component R10
+ R?
+ SM0603
+ SM0805
+ R?-*
+ SM1206
+$endlist
+$component R9
+ R?
+ SM0603
+ SM0805
+ R?-*
+ SM1206
+$endlist
+$component R15
+ R?
+ SM0603
+ SM0805
+ R?-*
+ SM1206
+$endlist
+$component R14
+ R?
+ SM0603
+ SM0805
+ R?-*
+ SM1206
+$endlist
+$component R13
+ R?
+ SM0603
+ SM0805
+ R?-*
+ SM1206
+$endlist
+$component R12
+ R?
+ SM0603
+ SM0805
+ R?-*
+ SM1206
+$endlist
+$component R8
+ R?
+ SM0603
+ SM0805
+ R?-*
+ SM1206
+$endlist
+$component R7
+ R?
+ SM0603
+ SM0805
+ R?-*
+ SM1206
+$endlist
+$component R6
+ R?
+ SM0603
+ SM0805
+ R?-*
+ SM1206
+$endlist
+$component C2
+ SM*
+ C?
+ C1-1
+$endlist
+$component C3
+ SM*
+ C?
+ C1-1
+$endlist
+$component C4
+ SM*
+ C?
+ C1-1
+$endlist
+$component C6
+ SM*
+ C?
+ C1-1
+$endlist
+$component C5
+ SM*
+ C?
+ C1-1
+$endlist
+$component R1
+ R?
+ SM0603
+ SM0805
+ R?-*
+ SM1206
+$endlist
+$component C10
+ SM*
+ C?
+ C1-1
+$endlist
+$component C9
+ SM*
+ C?
+ C1-1
+$endlist
+$component C8
+ SM*
+ C?
+ C1-1
+$endlist
+$component C1
+ SM*
+ C?
+ C1-1
+$endlist
+$component D2
+ LED-3MM
+ LED-5MM
+ LED-10MM
+ LED-0603
+ LED-0805
+ LED-1206
+ LEDV
+$endlist
+$component D1
+ LED-3MM
+ LED-5MM
+ LED-10MM
+ LED-0603
+ LED-0805
+ LED-1206
+ LEDV
+$endlist
+$component R5
+ R?
+ SM0603
+ SM0805
+ R?-*
+ SM1206
+$endlist
+$component R4
+ R?
+ SM0603
+ SM0805
+ R?-*
+ SM1206
+$endlist
+$component R3
+ R?
+ SM0603
+ SM0805
+ R?-*
+ SM1206
+$endlist
+$component R2
+ R?
+ SM0603
+ SM0805
+ R?-*
+ SM1206
+$endlist
+$endfootprintlist
+}
+{ Pin List by Nets
+Net 1 "" ""
+ C10 1
+ X1 2
+ U2 17
+Net 2 "" ""
+ C9 1
+ X1 1
+ U2 16
+Net 3 "/ISP_MOSI" "ISP_MOSI"
+ U2 10
+ CON1 4
+Net 4 "/ISP_MISO" "ISP_MISO"
+ CON1 1
+ U2 11
+Net 5 "/ISP_SCK" "ISP_SCK"
+ CON1 3
+ U2 9
+Net 6 "/ISP_RST" "ISP_RST"
+ U2 13
+ R1 2
+ CON1 5
+Net 7 "" ""
+ R7 2
+ D3 2
+Net 9 "" ""
+ U2 25
+ R15 1
+Net 11 "" ""
+ U2 38
+ R9 1
+Net 13 "" ""
+ R10 1
+ U2 37
+Net 14 "" ""
+ U2 27
+ R13 1
+Net 15 "" ""
+ R11 1
+ U2 36
+Net 16 "/LED_G" "LED_G"
+ R6 1
+ U2 29
+Net 17 "" ""
+ U2 44
+ C3 2
+ L1 2
+Net 18 "" ""
+ U2 42
+ C8 2
+Net 21 "GND" "GND"
+ D2 2
+ C1 2
+ J1 5
+ D1 2
+ K1 3
+ C5 2
+ C3 1
+ C2 2
+ C4 2
+ D3 6
+ D3 5
+ D3 4
+ C6 2
+ U2 35
+ U2 43
+ C9 2
+ C10 2
+ CON1 6
+ C8 1
+ U2 23
+ U2 5
+ U2 15
+Net 24 "" ""
+ U2 6
+ C5 1
+Net 27 "" ""
+ R10 2
+ P2 1
+Net 28 "" ""
+ P1 1
+ R9 2
+Net 29 "/LED1" "LED1"
+ U2 33
+ R4 1
+Net 30 "" ""
+ R5 2
+ D2 1
+Net 31 "/LED2" "LED2"
+ R5 1
+ U2 32
+Net 32 "" ""
+ D1 1
+ R4 2
+Net 33 "" ""
+ P3 1
+ R11 2
+Net 34 "" ""
+ U2 21
+ K1 1
+Net 36 "" ""
+ K1 2
+ U2 20
+Net 37 "" ""
+ R2 2
+ U2 3
+Net 38 "" ""
+ R2 1
+ J1 2
+Net 39 "" ""
+ R3 2
+ J1 3
+Net 40 "" ""
+ U2 4
+ R3 1
+Net 41 "/S1" "S1"
+ P6 1
+ R12 2
+Net 42 "/S2" "S2"
+ P7 1
+ R13 2
+Net 43 "/S3" "S3"
+ R14 2
+ P8 1
+Net 44 "/S4" "S4"
+ R15 2
+ P9 1
+Net 45 "+5V" "+5V"
+ U2 24
+ U2 14
+ U2 7
+ U2 2
+ C1 1
+ J1 1
+ U2 34
+ C6 1
+ R1 1
+ C2 1
+ C4 1
+ CON1 2
+ L1 1
+Net 46 "" ""
+ R12 1
+ U2 28
+Net 47 "" ""
+ D3 3
+ R6 2
+Net 48 "/LED_R" "LED_R"
+ R7 1
+ U2 30
+Net 49 "" ""
+ D3 1
+ R8 2
+Net 50 "/LED_B" "LED_B"
+ U2 31
+ R8 1
+Net 51 "" ""
+ U2 26
+ R14 1
+}
+#End
