@@ -4,6 +4,9 @@
 
   dean [at] fourwalledcubicle [dot] com
            www.lufa-lib.org
+
+       modified by:
+       Tuomas Nylund
 */
 
 /*
