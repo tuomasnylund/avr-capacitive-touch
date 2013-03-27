@@ -1,4 +1,4 @@
-EESchema Schematic File Version 2  date Fri 04 May 2012 02:13:05 PM EEST
+EESchema Schematic File Version 2  date Wed 27 Mar 2013 18:11:13 GMT
 LIBS:power
 LIBS:device
 LIBS:transistors
@@ -29,7 +29,6 @@ LIBS:opto
 LIBS:atmel
 LIBS:contrib
 LIBS:valves
-LIBS:my_parts
 LIBS:qTouchTest2-cache
 EELAYER 25  0
 EELAYER END
@@ -37,7 +36,7 @@ $Descr A4 11700 8267
 encoding utf-8
 Sheet 1 1
 Title ""
-Date "4 may 2012"
+Date "27 mar 2013"
 Rev ""
 Comp ""
 Comment1 ""
@@ -529,7 +528,7 @@ L C C5
 U 1 1 4F967642
 P 4050 3600
 F 0 "C5" H 4100 3700 50  0000 L CNN
-F 1 "C5" H 4100 3500 50  0000 L CNN
+F 1 "1uF" H 4100 3500 50  0000 L CNN
 	1    4050 3600
 	1    0    0    -1  
 $EndComp

@@ -1,4 +1,4 @@
-# EESchema Netlist Version 1.1 created  Fri 04 May 2012 01:08:55 PM EEST
+# EESchema Netlist Version 1.1 created  Wed 27 Mar 2013 18:13:38 GMT
 (
  ( /4FA3A273 $noname  R11 1k {Lib=R}
   (    1 N-000015 )
@@ -73,7 +73,7 @@
   (    1 +5V )
   (    2 GND )
  )
- ( /4F967642 $noname  C5 C5 {Lib=C}
+ ( /4F967642 $noname  C5 1uF {Lib=C}
   (    1 N-000024 )
   (    2 GND )
  )
